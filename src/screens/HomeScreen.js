@@ -1,9 +1,16 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 const HomeScreen = () => {
-  return <Text style={styles.text}>HomeScreen</Text>;
-};
+
+  let counter = 0;
+  console.log(counter);
+  return <View>
+    <Text>Fight For Glory!</Text>
+    <Button title="Begin the adventrue!" onPress={function(){ counter++; console.log(counter);}} />
+  </View>
+  /* return <Text style={styles.text}>Fight for Glory!</Text>; */
+}
 
 const styles = StyleSheet.create({
   text: {

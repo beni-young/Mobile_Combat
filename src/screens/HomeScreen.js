@@ -7,7 +7,7 @@ const HomeScreen = () => {
   console.log(counter);
   return <View>
     <Text>Fight For Glory!</Text>
-    <Button title="Begin the adventrue!" onPress={function(){ counter++; console.log(counter);}} />
+    <Button title="Begin the adventure!" onPress={function(){ counter++; console.log(counter);}} />
   </View>
   /* return <Text style={styles.text}>Fight for Glory!</Text>; */
 }

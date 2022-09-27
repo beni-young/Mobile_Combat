@@ -16,16 +16,16 @@ const Creation = () => {
     return <View>
       <Text>Grow in Power</Text>
       <Button title="Decrease" onPress={function(){ setStrength(strength - 1); setTotal(total + 1); console.log(strength);}} />
-      <Text>Current Strength: {strength} </Text>
+      <Text>Current strength: {strength} </Text>
       <Button title="Increase" onPress={function(){ setStrength(strength + 1); setTotal(total - 1); console.log(strength);}} />
 
-      <Button title="Decrease" onPress={function(){ setHealth(strength - 1); setTotal(total + 1); console.log(health);}} />
+      <Button title="Decrease" onPress={function(){ setHealth(health - 10); setTotal(total + 1); console.log(health);}} />
       <Text>Current health: {health}</Text>
-      <Button title="Increase" onPress={function(){ setHealth(strength + 1); setTotal(total - 1); console.log(health);}} />
+      <Button title="Increase" onPress={function(){ setHealth(health + 10); setTotal(total - 1); console.log(health);}} />
 
-      <Button title="Decrease" onPress={function(){ setMagic(strength - 1); setTotal(total + 1); console.log(magic);}} />
+      <Button title="Decrease" onPress={function(){ setMagic(magic - 1); setTotal(total + 1); console.log(magic);}} />
       <Text>Current magic: {magic}</Text>
-      <Button title="Increase" onPress={function(){ setMagic(strength + 1); setTotal(total - 1); console.log(magic);}} />
+      <Button title="Increase" onPress={function(){ setMagic(magic + 1); setTotal(total - 1); console.log(magic);}} />
 
       <Text>Points Remaining: {total}</Text>
 

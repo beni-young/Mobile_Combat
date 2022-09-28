@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import CreationCounter from '../../Components/CreationCounter';
 
 const STAT_SCREEN_STATE = "characterCreation";
@@ -15,6 +15,12 @@ const Creation = () => {
     const [health, setHealth] = useState(10);
     const [magic, setMagic] = useState(1);
     const [total, setTotal] = useState(15); 
+
+    // Enemy Stats
+    const [estrength, enemyStrength] = useState(5);
+    const [ehealth, enemyHealth] = useState(100);
+    const [emagic, enemyMagic] = useState(5);
+    
 
     loginHandler = (state) => {
 
@@ -88,7 +94,28 @@ const Creation = () => {
           </View>
         break;
     case COMBAT_SCREEN_STATE:
-        whatToDisplay = <View><Text>Dancing!</Text>
+        whatToDisplay = <View><Text style={styles.txtTitle}>Dancing!</Text>
+        <Text style={styles.EstatView}>Monster Stats{'\n'}
+          Health: {ehealth}{'\n'}
+          Strength: {estrength}{'\n'}
+          Magic: {emagic}{'\n'}
+        </Text>
+        <Text style={styles.statView}>Player Stats{'\n'}
+        Health: {health} {'\n'}
+        Stength: {strength} {'\n'}
+        Magic: {magic}{'\n'}
+        </Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Image source={require('../../assets/hbo-max-legendary.png')} />
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
         <Button title="Go Back!" onPress={() => loginHandler('c')}/> 
         
         </View>
@@ -99,8 +126,36 @@ const Creation = () => {
   }
 
 const styles = StyleSheet.create({
-    text: {
-      fontSize: 30,
+    viewStyle: {
+      color: "blue"
+    },
+    statView: {
+      color: "green",
+      flexDirection: "row",
+      borderColor: 'green',
+      borderWidth: 1,
+      alignSelf: "flex-end",
+      position: "absolute",
+      
+    },
+    EstatView: {
+      color: "green",
+      flexDirection: "row",
+      borderColor: 'green',
+      borderWidth: 1,
+      position: "absolute",
+      alignSelf: "flex-start"
+    },
+    txtTitle: {
+      fontSize: 20,
+      flexDirection: "row",
+      borderColor: "blue",
+      borderWidth: 1,
+      alignSelf: "flex-start",
+      position: "absolute",
+      left:150,
+      right: 175
+
     },
   });
 

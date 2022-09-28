@@ -5,11 +5,11 @@ import Creation from "./src/screens/Creation";
 
 const navigator = createStackNavigator(
   {
-    Home: HomeScreen,
-    Create: Creation,
+    Home: { screen: HomeScreen },
+    Create: {screen: Creation },
   },
   {
-    initialRouteName: "Create",
+    initialRouteName: "Home",
     defaultNavigationOptions: {
       title: "Mobile Game",
     },

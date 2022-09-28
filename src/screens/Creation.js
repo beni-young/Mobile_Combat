@@ -98,7 +98,7 @@ const Creation = () => {
         <Text style={styles.EstatView}>Monster Stats{'\n'}
           Health: {ehealth}{'\n'}
           Strength: {estrength}{'\n'}
-          Magic: {emagic}{'\n'}
+          Magic: {emagic} {'\n'}
         </Text>
         <Text style={styles.statView}>Player Stats{'\n'}
         Health: {health} {'\n'}

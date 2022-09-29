@@ -73,30 +73,86 @@ const Creation = () => {
 
     const Combat = (move) => {
       let damage = 0;
-      let mouth = '';
+      let mouth = 0;
+      let test = '';
 
       mouth= Math.floor(Math.random() * 2);
 
       if(move == 'vogue'){
-        damage = strength + Math.floor(Math.random() * 10);
+        damage = strength + Math.floor(Math.random() * 15);
         enemyHealth(ehealth - damage);
-        setCombat( txtCombat(mouth) + "\n" + 'Vogue did ' + damage + ' dmg ');
+        setCombat( txtCombat(mouth) + 'Vogue does ' + damage + ' points of attack dmg ');
+      }
+
+      if(move == 'duck'){
+        
+        if(magic === 0){
+          setCombat('You dont have enough Duck Walk in you fool!');
+        } else {
+        damage = Math.floor(Math.random() * 15) + 5;
+        setMagic(magic - 1);
+        enemyHealth(ehealth - damage);
+        setCombat( txtCombat(mouth) + 'Duck does ' + damage + ' points of magic dmg ' + magic);
+        }
+      }
+      if(move == 'shade'){
+
+        if(magic <= 1){
+          setCombat(txtCombat(mouth) + 'What a joke?! You cant shade an Icon anymore!');
+        } else {
+        damage = Math.floor(Math.random() * 15);
+        setMagic(magic - 2);
+        setHealth(health + damage);
+        setCombat( txtCombat(mouth) + 'Shade heals for ' + damage + ' points ');
+        }
       }
     }
 
     // different phrases to say during the combat
     // if Icon or Player health == 0 then game is over
     const txtCombat = (dancer) => {
+
+      let dmgEnemy = "";
+      let damage = 0;
+      let attack = 0;
+
+      attack = Math.floor(Math.random() * 2);
+
+      if (emagic <= 0){
+        attack = 0;
+      } else if(emagic < 2){
+        attack = Math.floor(Math.random() * 1);
+      }
+
+      switch (attack){
+        case 0:
+          damage = Math.floor(Math.random() * 15);
+          setHealth(health - damage);
+          dmgEnemy = "You take " + damage + " in Vogue damage.\n";
+          
+        case 1:
+          damage = Math.floor(Math.random() * 15) + 10;
+          enemyMagic(emagic - 1);
+          setHealth(health - damage);
+          dmgEnemy = "You take " + damage + " in Spin Dip damage.\n";
+        case 2:
+          damage = Math.floor(Math.random() * 15);
+          enemyMagic(emagic - 2);
+          enemyHealth(ehealth + damage);
+          dmgEnemy = "Icon heals for " + damage + " points.\n";
+      }
+
+
       
       switch(dancer) {
         case 0:
-          return "You will never be an Icon like me!";
+          return "You will never be an Icon like me!\n" + dmgEnemy;
           break;
         case 1:
-          return "Don't you ever try to disrespect Mother!";
+          return "Don't you ever try to disrespect Mother!\n" + dmgEnemy;
           break;
         case 2:
-          return "You may Slay another day!"
+          return "You may Slay another day!\n" + dmgEnemy;
       }
 
       return null;
@@ -160,10 +216,10 @@ const Creation = () => {
         <TouchableOpacity style={styles.btnVogue} onPress={() => Combat('vogue')}>
           <Text>Vogue</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnDuck} onPress={() => loginHandler('c')}>
+        <TouchableOpacity style={styles.btnDuck} onPress={() => Combat('duck')}>
           <Text>Duck Walk</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnShade} onPress={() => loginHandler('c')}>
+        <TouchableOpacity style={styles.btnShade} onPress={()=> Combat('shade')}>
           <Text>Throw Shade</Text>
         </TouchableOpacity>        
         </View>

@@ -6,7 +6,7 @@ const CreationCounter = (props) => {
 
     return <View>
         <Button title="Decrease" onPress={props.onDecrease}/>
-        <Text>Current {props.name}: {props.value}</Text>
+        <Text>Status Level - {props.name}: {props.value}</Text>
         <Button title="Increase" onPress={props.onIncrease} />
     </View>
 }

@@ -80,8 +80,9 @@ const Creation = () => {
 
       if(move == 'vogue'){
         damage = strength + Math.floor(Math.random() * 15);
-        enemyHealth(ehealth - damage);
+        
         setCombat( txtCombat(mouth) + 'Vogue does ' + damage + ' points of attack dmg ');
+        enemyHealth(ehealth - damage);
       }
 
       if(move == 'duck'){
@@ -89,23 +90,24 @@ const Creation = () => {
         if(magic === 0){
           setCombat('You dont have enough Duck Walk in you fool!');
         } else {
-        damage = Math.floor(Math.random() * 15) + 5;
-        setMagic(magic - 1);
+        damage = Math.floor(Math.random() * 15) + 10;
+        setMagic(magic - 1);        
+        setCombat( txtCombat(mouth) + 'Duck does ' + damage + ' points of magic dmg ');
         enemyHealth(ehealth - damage);
-        setCombat( txtCombat(mouth) + 'Duck does ' + damage + ' points of magic dmg ' + magic);
         }
       }
       if(move == 'shade'){
-
         if(magic <= 1){
           setCombat(txtCombat(mouth) + 'What a joke?! You cant shade an Icon anymore!');
         } else {
-        damage = Math.floor(Math.random() * 15);
+        damage = Math.floor(Math.random() * 15) + 5;
         setMagic(magic - 2);
         setHealth(health + damage);
         setCombat( txtCombat(mouth) + 'Shade heals for ' + damage + ' points ');
         }
       }
+
+      
     }
 
     // different phrases to say during the combat
@@ -129,20 +131,22 @@ const Creation = () => {
           damage = Math.floor(Math.random() * 15);
           setHealth(health - damage);
           dmgEnemy = "You take " + damage + " in Vogue damage.\n";
-          
+          break;
         case 1:
-          damage = Math.floor(Math.random() * 15) + 10;
+          damage = Math.floor(Math.random() * 20) + 5;
           enemyMagic(emagic - 1);
           setHealth(health - damage);
           dmgEnemy = "You take " + damage + " in Spin Dip damage.\n";
+          break;
         case 2:
-          damage = Math.floor(Math.random() * 15);
+          damage = Math.floor(Math.random() * 15) + 1;
           enemyMagic(emagic - 2);
           enemyHealth(ehealth + damage);
           dmgEnemy = "Icon heals for " + damage + " points.\n";
+          break;
       }
 
-
+     
       
       switch(dancer) {
         case 0:
@@ -191,7 +195,7 @@ const Creation = () => {
           </View>
         break;
     case COMBAT_SCREEN_STATE:
-        whatToDisplay = <View style={{padding: 5}}><Text style={styles.txtTitle}>Vogue Battle!</Text>
+        whatToDisplay = <View style={styles.viewStyle}><Text style={styles.txtTitle}>Vogue Battle!</Text>
         <Text style={styles.EstatView}>Icon Stats{'\n'}
           Serving Body: {ehealth}{'\n'}
           Kunti: {estrength}{'\n'}
@@ -207,21 +211,24 @@ const Creation = () => {
         <Text></Text>
         <Text></Text>
         <Text></Text>
-        <Image style={styles.mstImage} source={require('../../assets/hbo-max-legendary.png')} />
-        <Text style={{ alignSelf: 'center'}}>House Extravaganza</Text>
+        { (health <= 0 && ehealth > health)? <Image style={styles.mstImage} source={require('../../assets/10857802-16x9-2150x1210-1-300x169.jpg')} /> : null }
+        { (ehealth <= 0 && health > ehealth)? <Image style={styles.mstImage} source={require('../../assets/Voguing-judges-all-give-004-300x199.jpg')} /> : null }
+        { (health > 0 && ehealth > 0) ? <Image style={styles.mstImage} source={require('../../assets/hbo-max-legendary.png')} /> : null }
+        { (health > 0 && ehealth > 0) ? <Text style={{ alignSelf: 'center'}}>House Extravaganza</Text> : null }
         <Text></Text>
         <Text style={styles.txtCombat}>{msgCombat}</Text>
-        <Text>are you ready to let it all out on the floor?!</Text>
+        {(health <= 0 && ehealth > health)? <Text style={{textAlign: 'center', fontWeight: 'bold',}}>You have been served! Get off my floor!</Text> : null }
+        {(ehealth <= 0 && health > ehealth) ? <Text style={{textAlign: 'center', fontWeight: 'bold',}}>You won!! 10s 10s 10s across the board!</Text> : null }
         <Text></Text>
-        <TouchableOpacity style={styles.btnVogue} onPress={() => Combat('vogue')}>
+        { (health > 0 && ehealth > 0) ?( <TouchableOpacity style={styles.btnVogue} onPress={() => Combat('vogue')}>
           <Text>Vogue</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnDuck} onPress={() => Combat('duck')}>
+        </TouchableOpacity>) : null }
+        { (health > 0 && ehealth > 0)  ?( <TouchableOpacity style={styles.btnDuck} onPress={() => Combat('duck')}>
           <Text>Duck Walk</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnShade} onPress={()=> Combat('shade')}>
+        </TouchableOpacity> ) : null }
+        { (health > 0 && ehealth > 0) ?( <TouchableOpacity style={styles.btnShade} onPress={()=> Combat('shade')}>
           <Text>Throw Shade</Text>
-        </TouchableOpacity>        
+        </TouchableOpacity> ) : null }       
         </View>
         break;
 
@@ -231,7 +238,9 @@ const Creation = () => {
 
 const styles = StyleSheet.create({
     viewStyle: {
-      color: "blue"
+      backgroundColor: '#e7feff', 
+      color: "blue",
+      padding: 5,
     },
     mstImage: {
       width: 200,
@@ -281,7 +290,7 @@ const styles = StyleSheet.create({
       position: "absolute",
       right: 330,
       left: 10,
-      bottom: 44,
+      bottom: 5,
         
     },
     btnDuck: {      
